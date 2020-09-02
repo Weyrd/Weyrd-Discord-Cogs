@@ -1,4 +1,4 @@
-# Weyrd-Cog
+# Weyrd-Cogs
 
 
     Ensure downloader is loaded with [p]load downloader
