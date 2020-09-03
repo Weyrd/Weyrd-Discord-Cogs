@@ -511,7 +511,7 @@ class GuildWars2(commands.Cog):
             await ctx.send("Need permission to embed links")
 
     @commands.command(pass_context=True, hidden=True)
-    async def wallet(self, ctx, switch : bool):
+    async def resetCmd(self, ctx, switch : bool):
         discord.ext.commands.HelpCommand(show_hidden=switch)
         await ctx.send(f"Mode {switch}")
 
