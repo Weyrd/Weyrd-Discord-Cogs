@@ -2,7 +2,6 @@ import discord
 from redbot.core import commands
 from redbot.core import checks
 from redbot.core import Config
-#from __main__ import send_cmd_help
 from redbot.core.data_manager import bundled_data_path
 
 
@@ -55,6 +54,7 @@ class GuildWars2(commands.Cog):
 
         self.gamedata = json.load(open(str(bundled_data_path(self) / "gamedata.json"), "r"))
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
+        self.errorNotKeyProvided = "Please enter you best API key before talking to me D:"
 
     def __unload(self):
         self.session.close()
@@ -152,6 +152,10 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
         scopes = []
         try:
             self._check_scopes_(user, scopes)
@@ -205,6 +209,9 @@ class GuildWars2(commands.Cog):
         user = ctx.message.author
         scopes = ["account"]
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
         try:
             self._check_scopes_(user, scopes)
             key = keylist["key"]
@@ -253,6 +260,9 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
 
         scopes = ["inventories", "characters"]
         msg = await ctx.send("Getting legendary insights, this might take a while...")
@@ -308,6 +318,9 @@ class GuildWars2(commands.Cog):
         scopes = ["characters"]
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
 
         character = character.title()
         character.replace(" ", "%20")
@@ -366,6 +379,10 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
         scopes = ["characters"]
         try:
             self._check_scopes_(user, scopes)
@@ -421,6 +438,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         scopes = ["characters"]
         character = character.title()
         character.replace(" ", "%20")
@@ -488,6 +510,12 @@ class GuildWars2(commands.Cog):
         except discord.HTTPException:
             await ctx.send("Need permission to embed links")
 
+    @commands.command(pass_context=True, hidden=True)
+    async def wallet(self, ctx, switch : bool):
+        discord.ext.commands.HelpCommand(show_hidden=switch)
+        await ctx.send(f"Mode {switch}")
+
+
     @commands.group(pass_context=True)
     async def wallet(self, ctx):
         """Wallet related commands.
@@ -501,6 +529,11 @@ class GuildWars2(commands.Cog):
         """Returns a list of all currencies"""
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         try:
             endpoint = "currencies?ids=all"
             results = await self.call_api(endpoint)
@@ -568,6 +601,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         scopes = ["wallet"]
         try:
             self._check_scopes_(user, scopes)
@@ -618,6 +656,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         scopes = ["wallet"]
         try:
             self._check_scopes_(user, scopes)
@@ -667,6 +710,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         scopes = ["wallet"]
         try:
             self._check_scopes_(user, scopes)
@@ -717,6 +765,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         color = self.getColor(user)
         guild = guild.replace(' ', '%20')
         scopes = ["guilds"]
@@ -769,6 +822,11 @@ class GuildWars2(commands.Cog):
         Doesn't require any keys/scopes"""
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         guild = guild.replace(' ', '%20')
         try:
             endpoint = "guild/search?name={0}".format(guild)
@@ -792,6 +850,11 @@ class GuildWars2(commands.Cog):
         Requires key with guilds scope and also Guild Leader permissions ingame"""
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         color = self.getColor(user)
         guild = guild.replace(' ', '%20')
         scopes = ["guilds"]
@@ -853,6 +916,11 @@ class GuildWars2(commands.Cog):
         user = ctx.message.author
         server = ctx.message.guild
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         color = self.getColor(user)
         guild = guild.replace(' ', '%20')
         language = await self.config.guild(server).language()
@@ -940,6 +1008,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         scopes = ["pvp"]
         try:
             self._check_scopes_(user, scopes)
@@ -1004,6 +1077,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         professionsformat = {}
         scopes = ["pvp"]
         try:
@@ -1096,6 +1174,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         scopes = ["progression"]
         try:
             self._check_scopes_(user, scopes)
@@ -1140,6 +1223,11 @@ class GuildWars2(commands.Cog):
         """
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         try:
             endpoint = "worlds?ids=all"
             results = await self.call_api(endpoint)
@@ -1236,6 +1324,11 @@ class GuildWars2(commands.Cog):
         search = search.replace(" ", "+")
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         url = wiki + \
             "index.php?title=Special%3ASearch&profile=default&fulltext=Search&search={0}".format(
                 search)
@@ -1371,6 +1464,11 @@ class GuildWars2(commands.Cog):
         invoke with sells or buys"""
         user = ctx.message.author
         keylist = await self.config.user(user).player()
+        if not keylist:
+            await ctx.send(self.errorNotKeyProvided)
+            return
+
+
         color = self.getColor(user)
         state = buys_sells.lower()
         scopes = ["tradingpost"]
@@ -1443,7 +1541,7 @@ class GuildWars2(commands.Cog):
         server = ctx.message.guild
         keylist = await self.config.user(user).player()
         if not keylist:
-            await ctx.send("Please enter you best API key before talking to me D:")
+            await ctx.send(self.errorNotKeyProvided)
             return
         color = self.getColor(user)
         scopes = ["tradingpost"]
@@ -1512,7 +1610,7 @@ class GuildWars2(commands.Cog):
 
     async def _gamebuild_checker(self):
         while False is not True:
-            await asyncio.sleep(10)
+            await asyncio.sleep(5)
             global_build_check =  await self.config.global_build_checking()
             if global_build_check:
                 if await self.update_build():
@@ -1524,6 +1622,7 @@ class GuildWars2(commands.Cog):
                             await channel.send(f"@he re Guild Wars 2 has just updated! New build:`{id_build}`")
                     else:
                         print ("A new build was found, but no channels to notify were found. Maybe error?")
+            await asyncio.sleep(3600)
 
     def gold_to_coins(self, money):
         gold, remainder = divmod(money, 10000)
