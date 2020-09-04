@@ -17,6 +17,7 @@
 
  # Cogs available 
  ## GuildWars2 :
+ The functions were mostly not made by me. I just debugged, redo some of the code like all the storage, Discord embeds, change some of the python 2.x written part etc... And translated to RedBot V3.
   > I dunno, but this Cog doesn't like me and this is reciprocal. Funny Cog ~ Wyrd
  ### List of commands :
 ![View of Red Help](https://cdn.discordapp.com/attachments/371446579783139328/751489638388203601/unknown.png)
