@@ -21,7 +21,7 @@ Ave Discord Morituri te Salutant
  ### Requierments :
 - Need one Gw2 API key per user.  You can request key [here](https://lmgtfy.com/?q=gw2+api+key)
 
-### installation :
+### Installation :
 After run [installation](https://github.com/Weyrd/Weyrd-Cogs#installation) just run :
  ```
 [p]cog install Weyrd-Cogs gw2
