@@ -1,5 +1,7 @@
 # Weyrd-Cogs 
 [![Hey ! I'm Discord](https://cdn.discordapp.com/attachments/309034003980222467/751482832509075625/unknown.png)](https://discord.com/) Ave Discord Morituri te Salutant
+
+
 # Getting started
 ## Installation
 #### Using the CogBoard cog (Not supported yet)
@@ -11,6 +13,8 @@
  [p]repo add Weyrd-Cogs https://github.com/Weyrd/Weyrd-Cog
  [p]cog install Weyrd-Cogs <cog_name>
 ```    
+
+
  # Cogs available 
  ## GuildWars2 :
   > I dunno, but this Cog doesn't like me and this is reciprocal. Funny Cog ~ Wyrd
