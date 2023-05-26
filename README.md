@@ -1,6 +1,7 @@
-# Weyrd-Cogs 
-[![Hey ! I'm Discord](https://cdn.discordapp.com/attachments/309034003980222467/751482832509075625/unknown.png)](https://discord.com/) Ave Discord Morituri te Salutant
-
+# Weyrd-Discord-Cogs 
+[![Hey ! I'm Discord](https://cdn.discordapp.com/attachments/309034003980222467/751482832509075625/unknown.png)](https://discord.com/)
+Ave Discord Morituri te Salutant
+Cogs for [Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot) 
 
 # Getting started
 ## Installation
